@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /root/rfid/sllurp/bin/inventory 192.168.5.149 >> inventory.txt

@@ -4,7 +4,7 @@ import logging
 import pprint
 import time
 from twisted.internet import reactor, defer
-from datetime import datetime
+from datetime import datetime,timedelta
 
 import sllurp.llrp as llrp
 from sllurp.llrp_proto import Modulation_Name2Type, DEFAULT_MODULATION, \
@@ -14,6 +14,8 @@ numTags = 0
 logger = logging.getLogger('sllurp')
 
 args = None
+
+lastseen=[]
 
 def finish (_):
     #logger.info('total # of tags seen: {}'.format(numTags))
@@ -29,9 +31,13 @@ def tagReportCallback (llrpMsg):
     tags = llrpMsg.msgdict['RO_ACCESS_REPORT']['TagReportData']
     if len(tags):
         logger.info('saw tag(s): {}'.format(pprint.pformat(tags)))
+        dt=timedelta(seconds=5)
         for tag in tags:
-            print(datetime.utcnow().replace(microsecond=0),tag['EPC-96'])
-            pass
+            id=tag['EPC-96']
+            #print(datetime.utcfromtimestamp(tag['LastSeenTimestampUTC'][0]));
+            print(lastseen[id]);
+            print(datetime.utcnow().replace(microsecond=0),id)
+            lastseen[id]=datetime.utcnow()
     else:
         #logger.info('no tags seen')
         return
@@ -75,7 +81,7 @@ def init_logging ():
 
     root = logging.getLogger()
     root.setLevel(logLevel)
-    root.setLevel(100)
+    #root.setLevel(100)
     root.handlers = [stderr,]
 
     if args.logfile:

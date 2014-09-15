@@ -1,0 +1,9 @@
+[Unit]
+Description=RFID Tag Inventory
+
+[Service]
+ExecStart=/root/rfid/sllurp/doinventory
+Restart=always
+
+[Install]
+WantedBy=multi-user.target 
