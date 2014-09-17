@@ -6,4 +6,4 @@ ExecStart=/root/rfid/sllurp/doinventory
 Restart=always
 
 [Install]
-WantedBy=multi-user.target 
+#WantedBy=multi-user.target 

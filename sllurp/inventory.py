@@ -16,6 +16,7 @@ logger = logging.getLogger('sllurp')
 args = None
 
 lastreported={}
+count={}
 
 def finish (_):
     #logger.info('total # of tags seen: {}'.format(numTags))
@@ -35,10 +36,11 @@ def tagReportCallback (llrpMsg):
         now=datetime.utcnow();
         for tag in tags:
             id=tag['EPC-96']
+            count[id]=count.get(id,0)+1
             #print(datetime.utcfromtimestamp(tag['LastSeenTimestampUTC'][0]));
             if id in lastreported and lastreported[id]>now-dt:
                 continue
-            print(now.replace(microsecond=0),id)
+            print(now.replace(microsecond=0),id,count[id])
             lastreported[id]=now
     else:
         #logger.info('no tags seen')
