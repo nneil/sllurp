@@ -5,6 +5,7 @@ import pprint
 import time
 from twisted.internet import reactor, defer
 from datetime import datetime,timedelta
+import sys
 
 import sllurp.llrp as llrp
 from sllurp.llrp_proto import Modulation_Name2Type, DEFAULT_MODULATION, \
@@ -41,6 +42,7 @@ def tagReportCallback (llrpMsg):
             if id in lastreported and lastreported[id]>now-dt:
                 continue
             print(now.replace(microsecond=0),id,count[id])
+            sys.stdout.flush()
             lastreported[id]=now
     else:
         #logger.info('no tags seen')
