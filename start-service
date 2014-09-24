@@ -1,2 +1,2 @@
 ln -sf `pwd`/inventory.service /etc/systemd/system
-systemctl enable inventory.service
+systemctl start inventory.service

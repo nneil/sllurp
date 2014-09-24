@@ -32,7 +32,7 @@ def tagReportCallback (llrpMsg):
     tags = llrpMsg.msgdict['RO_ACCESS_REPORT']['TagReportData']
     if len(tags):
         logger.info('saw tag(s): {}'.format(pprint.pformat(tags)))
-        dt=timedelta(seconds=10)
+        dt=timedelta(seconds=5)
         now=datetime.utcnow();
         for tag in tags:
             id=tag['EPC-96']
