@@ -1,2 +1,2 @@
 #!/bin/bash
-exec /root/rfid/sllurp/bin/inventory 10.100.0.172 >> inventory.txt
+exec /root/rfid/sllurp/bin/inventory -a 1,2,3,4 10.100.0.172 >> inventory.txt
